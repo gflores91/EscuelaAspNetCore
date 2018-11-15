@@ -9,7 +9,7 @@ namespace EscuelaAspNetCore.Controllers
     {
         public IActionResult Index()
         {
-            var listaAsignaturas = new List<Asignatura>(){
+            var listaAsignaturas = new List<ObjetoEscuelaBase>(){
                 new Asignatura{Nombre = "Matematicas"},
                 new Asignatura{Nombre = "Lenguaje"},
                 new Asignatura{Nombre = "Ciencias Naturales"},

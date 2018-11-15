@@ -1,12 +1,12 @@
-﻿@model List<Asignatura>
+﻿@model List<ObjetoEscuelaBase>
 
 @{
-    ViewData["Title"] = "Datos de la asignatura";
+    ViewData["Title"] = "Datos de las asignaturas";
 }
 
 <h1> @ViewData["Title"] </h1>
 
 @foreach (var asignatura in Model)
 {
-    <partial name="_PartialAsignatura" model="asignatura" />
+    <partial name="_PartialObjetoEscuelaBase" model="asignatura" />
 }
