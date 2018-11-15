@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using EscuelaAspNetCore.Models;
 using System;
+using System.Collections.Generic;
 
 namespace EscuelaAspNetCore.Controllers
 {
@@ -8,12 +9,15 @@ namespace EscuelaAspNetCore.Controllers
     {
         public IActionResult Index()
         {
-            var asignatura = new Asignatura()
-            {
-                Nombre = "Programación"
+            var listaAsignaturas = new List<Asignatura>(){
+                new Asignatura{Nombre = "Matematicas"},
+                new Asignatura{Nombre = "Lenguaje"},
+                new Asignatura{Nombre = "Ciencias Naturales"},
+                new Asignatura{Nombre = "Manualidades"},
+                new Asignatura{Nombre = "Tecnología"}
             };
 
-            return View(asignatura);
+            return View(listaAsignaturas);
         }
     }
 }
