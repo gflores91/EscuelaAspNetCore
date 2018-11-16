@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using EscuelaAspNetCore.Models;
 using System;
+using System.Linq;
 
 namespace EscuelaAspNetCore.Controllers
 {
@@ -8,13 +9,14 @@ namespace EscuelaAspNetCore.Controllers
     {
         public IActionResult Index()
         {
-            var escuela = new Escuela()
-            {
-                Nombre = "Exodus Academy",
-                Direccion = "Angol, Concepción, Chile",
-                AnioFundacion = 2018
-            };
+            var escuela = _context.Escuelas.FirstOrDefault();
             return View(escuela);
+        }
+
+        private EscuelaContext _context;
+        public EscuelaController(EscuelaContext context)
+        {
+            _context = context;
         }
     }
 }
