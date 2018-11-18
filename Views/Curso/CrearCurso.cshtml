@@ -1,0 +1,53 @@
+@model Curso
+
+@{
+    ViewData["Title"] = "Crear curso";
+}
+
+
+<div class="row">
+
+    <div class="page-header">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" asp-action="CrearCurso" method="POST">
+            <div class="form-group">
+                <label asp-for="Nombre" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <input type="text" asp-for="Nombre" class="form-control">
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+           <div class="form-group">
+                <label asp-for="Direccion" class="col-sm-3 control-label">Dirección</label>
+                <div class="col-sm-9">
+                    <input type="text" asp-for="Direccion" class="form-control">
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jornada" class="col-sm-3 control-label">Tipo de jornada</label>
+                <div class="col-sm-9">
+                    @Html.DropDownList(
+                        "Jornada",
+                        Html.GetEnumSelectList<TiposJornadas>(),
+                        "Seleccione",
+                        new {@class="form-control"}
+                    )
+                    <span asp-validation-for="Jornada" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-default">Crear curso</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

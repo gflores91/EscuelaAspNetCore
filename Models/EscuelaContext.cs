@@ -22,10 +22,14 @@ namespace EscuelaAspNetCore.Models
         {
             base.OnModelCreating(modelBuilder);
 
+            var cursos = CargarCursos(CargarEscuela());
+            var asignaturas = CargarAsignaturas(cursos);
+            var alumnos = CargarAlumnos(cursos);
+
             modelBuilder.Entity<Escuela>().HasData(CargarEscuela());
-            modelBuilder.Entity<Asignatura>().HasData(CargarAsignaturas().ToArray());
-            modelBuilder.Entity<Alumno>().HasData(GenerarAlumnos().ToArray());
-            //modelBuilder.Entity<Curso>().HasData(CargarCursos().ToArray());
+            modelBuilder.Entity<Curso>().HasData(cursos.ToArray());
+            modelBuilder.Entity<Asignatura>().HasData(asignaturas.ToArray());
+            modelBuilder.Entity<Alumno>().HasData(alumnos.ToArray());
         }
 
         private Escuela CargarEscuela()
@@ -41,24 +45,26 @@ namespace EscuelaAspNetCore.Models
             return escuela;
         }
 
-        private List<Asignatura> CargarAsignaturas()
+        private List<Asignatura> CargarAsignaturas(List<Curso> cursos)
         {
-            // foreach (var curso in CargarCursos())
-            // {
-                var ListaAsignaturas = new List<Asignatura>(){
-                    new Asignatura{Nombre = "Matematicas"},
-                    new Asignatura{Nombre = "Lenguaje"},
-                    new Asignatura{Nombre = "Ciencias Naturales"},
-                    new Asignatura{Nombre = "Manualidades"},
-                    new Asignatura{Nombre = "Tecnología"}
+            var ListaAsignaturas = new List<Asignatura>();
+            foreach (var curso in cursos)
+            {
+                var LTmpAsignaturas = new List<Asignatura>(){
+                    new Asignatura{Nombre = "Matematicas", CursoId = curso.Id},
+                    new Asignatura{Nombre = "Lenguaje", CursoId = curso.Id},
+                    new Asignatura{Nombre = "Ciencias Naturales", CursoId = curso.Id},
+                    new Asignatura{Nombre = "Manualidades", CursoId = curso.Id},
+                    new Asignatura{Nombre = "Tecnología", CursoId = curso.Id}
                 };
+                ListaAsignaturas.AddRange(LTmpAsignaturas);
+                //curso.Asignaturas = LTmpAsignaturas;
+            }
 
-                return ListaAsignaturas;
-                // curso.Asignaturas = ListaAsignaturas;
-            // }
+            return ListaAsignaturas;
         }
 
-         private List<Alumno> GenerarAlumnos()
+        private List<Alumno> GenerarAlumnos(Curso curso, int cantidad)
         {
             string[] nombre1 = { "María", "Gabriel", "Alexis", "Pablo", "René" };
             string[] nombre2 = { "Alicia", "Flores", "Torres", "Alarcón", "Tapia" };
@@ -67,39 +73,51 @@ namespace EscuelaAspNetCore.Models
             var ListaAlumnos = from n1 in nombre1
                                from n2 in nombre2
                                from ap in apellido
-                               select new Alumno { Nombre = $"{n1} {n2} {ap}" };
+                               select new Alumno
+                               {
+                                   Nombre = $"{n1} {n2} {ap}",
+                                   CursoId = curso.Id
+                               };
 
-            return ListaAlumnos.OrderBy((al) => al.Id).ToList();
+            return ListaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
         }
 
-        private List<Curso> CargarCursos()
+        private List<Alumno> CargarAlumnos(List<Curso> cursos)
+        {
+            var listaAlumnos = new List<Alumno>();
+
+            Random rnd = new Random();
+            foreach (var curso in cursos)
+            {
+                int cantRandom = rnd.Next(5, 20);
+                var tmplist = GenerarAlumnos(curso, cantRandom);
+                listaAlumnos.AddRange(tmplist);
+            }
+            return listaAlumnos;
+        }
+
+        private List<Curso> CargarCursos(Escuela escuela)
         {
             var cursos = new List<Curso>(){
                 new Curso
                 {
                     Nombre = "A-1",
-                    Jornada = TiposJornadas.Diurna
+                    Jornada = TiposJornadas.Diurna,
+                    EscuelaId = escuela.Id
                 },
                 new Curso
                 {
                     Nombre = "B-1",
-                    Jornada = TiposJornadas.Vespertina
+                    Jornada = TiposJornadas.Vespertina,
+                    EscuelaId = escuela.Id
                 },
                 new Curso
                 {
                     Nombre = "C-3",
-                    Jornada = TiposJornadas.Diurna
+                    Jornada = TiposJornadas.Diurna,
+                    EscuelaId = escuela.Id
                 }
             };
-
-            Random rnd = new Random();
-
-            foreach (var curso in cursos)
-            {
-                int cantidad = rnd.Next(5, 40);
-                curso.Alumnos = GenerarAlumnos();
-            }
-
             return cursos;
         }
     }

@@ -13,6 +13,22 @@ namespace EscuelaAspNetCore.Controllers
             return View(_context.Asignaturas);
         }
 
+        [Route("/Asignatura/DetalleAsignatura/{asignaturaId}")]
+        public IActionResult DetalleAsignatura(string asignaturaId)
+        {
+            if (!string.IsNullOrEmpty(asignaturaId))
+            {
+                var asignatura = from asig in _context.Asignaturas
+                                 where asig.Id == asignaturaId
+                                 select asig;
+                return View(asignatura.SingleOrDefault());
+            }
+            else
+            {
+                return View("Index", _context.Asignaturas);
+            }
+        }
+
         private EscuelaContext _context;
         public AsignaturaController(EscuelaContext context)
         {

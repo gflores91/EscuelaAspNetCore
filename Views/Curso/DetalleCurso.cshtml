@@ -1,0 +1,22 @@
+@model Curso
+
+@{
+    ViewData["Title"] = "Datos del curso:";
+}
+
+<div class="row">    
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="page-header">
+            <h1>@ViewData["Title"]<small> @Model.Nombre</small></h1>
+        </div>
+        <p>
+            <strong>Id: </strong> @Model.Id
+        </p>
+        <p>
+            <strong>Nombre: </strong> @Model.Nombre
+        </p>
+        <p>
+            <strong>Tipo de Jornada: </strong> @Model.Jornada
+        </p>
+    </div>
+</div>
