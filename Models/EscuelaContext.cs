@@ -36,6 +36,7 @@ namespace EscuelaAspNetCore.Models
         {
             var escuela = new Escuela()
             {
+                Id = 1,
                 Nombre = "Exodus Academy",
                 Direccion = "Angol, Concepción, Chile",
                 AnioFundacion = 2018,
@@ -48,14 +49,16 @@ namespace EscuelaAspNetCore.Models
         private List<Asignatura> CargarAsignaturas(List<Curso> cursos)
         {
             var ListaAsignaturas = new List<Asignatura>();
+
+            int i=0;
             foreach (var curso in cursos)
             {
                 var LTmpAsignaturas = new List<Asignatura>(){
-                    new Asignatura{Nombre = "Matematicas", CursoId = curso.Id},
-                    new Asignatura{Nombre = "Lenguaje", CursoId = curso.Id},
-                    new Asignatura{Nombre = "Ciencias Naturales", CursoId = curso.Id},
-                    new Asignatura{Nombre = "Manualidades", CursoId = curso.Id},
-                    new Asignatura{Nombre = "Tecnología", CursoId = curso.Id}
+                    new Asignatura{Id = i+=1, Nombre = "Matematicas", CursoId = curso.Id},
+                    new Asignatura{Id = i+=1, Nombre = "Lenguaje", CursoId = curso.Id},
+                    new Asignatura{Id = i+=1, Nombre = "Ciencias Naturales", CursoId = curso.Id},
+                    new Asignatura{Id = i+=1, Nombre = "Manualidades", CursoId = curso.Id},
+                    new Asignatura{Id = i+=1, Nombre = "Tecnología", CursoId = curso.Id}
                 };
                 ListaAsignaturas.AddRange(LTmpAsignaturas);
                 //curso.Asignaturas = LTmpAsignaturas;
@@ -70,11 +73,13 @@ namespace EscuelaAspNetCore.Models
             string[] nombre2 = { "Alicia", "Flores", "Torres", "Alarcón", "Tapia" };
             string[] apellido = { "Cid", "Monsalve", "Torres", "Sepulveda", "Quezada" };
 
+            Random rnd = new Random();
             var ListaAlumnos = from n1 in nombre1
                                from n2 in nombre2
                                from ap in apellido
                                select new Alumno
                                {
+                                   Id = rnd.Next(),
                                    Nombre = $"{n1} {n2} {ap}",
                                    CursoId = curso.Id
                                };
@@ -101,18 +106,21 @@ namespace EscuelaAspNetCore.Models
             var cursos = new List<Curso>(){
                 new Curso
                 {
+                    Id = 1,
                     Nombre = "A-1",
                     Jornada = TiposJornadas.Diurna,
                     EscuelaId = escuela.Id
                 },
                 new Curso
                 {
+                    Id = 2,
                     Nombre = "B-1",
                     Jornada = TiposJornadas.Vespertina,
                     EscuelaId = escuela.Id
                 },
                 new Curso
                 {
+                    Id = 3,
                     Nombre = "C-3",
                     Jornada = TiposJornadas.Diurna,
                     EscuelaId = escuela.Id

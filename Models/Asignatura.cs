@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EscuelaAspNetCore.Models
 {
-    public class Asignatura: ObjetoEscuelaBase
+    public class Asignatura : ObjetoEscuelaBase
     {
-        public string CursoId { get; set; }
-        public Curso Curso { get; set; }  
+        [Required(ErrorMessage = "El nombre de la asignatura es requerido")]
+        [StringLength(50, ErrorMessage = "El nombre no puede tener más de 50 caracteres")]
+        [Display(Name = "Nombre de la asignatura")]
+        public override string Nombre { get; set; }
+        [Required]
+        [Display(Name = "Curso")]
+        public int CursoId { get; set; }
+        public Curso Curso { get; set; }
 
-        public List<Evaluacion> Evaluaciones { get; set; }      
+        public List<Evaluacion> Evaluaciones { get; set; }
     }
 }

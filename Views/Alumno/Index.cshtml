@@ -1,10 +1,41 @@
-﻿@model IEnumerable<Alumno>
+@model IEnumerable<EscuelaAspNetCore.Models.Alumno>
 
 @{
-ViewData["Title"] = "Datos de los alumnos";
+    ViewData["Title"] = "Datos de los alumnos";
 }
 
-<h1> @ViewData["Title"] </h1>
+<h2>@ViewData["Title"]</h2>
 
-
-<partial name="_PartialListaObjetosEscuela" />
+<p>
+    <a asp-action="Create">Crear nuevo alumno</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

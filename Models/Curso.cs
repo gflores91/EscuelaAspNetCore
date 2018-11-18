@@ -13,7 +13,7 @@ namespace EscuelaAspNetCore.Models
         public List<Alumno> Alumnos { get; set; }
         public string Direccion { get; set; }
 
-        public string EscuelaId { get; set; }
+        public int EscuelaId { get; set; }
         public Escuela Escuela { get; set; }
     }
 }

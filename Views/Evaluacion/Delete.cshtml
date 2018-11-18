@@ -1,0 +1,44 @@
+@model EscuelaAspNetCore.Models.Evaluacion
+
+@{
+    ViewData["Title"] = "Eliminar evaluación";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Estás seguro de eliminar la evaluación?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Asignatura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Asignatura.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Alumno)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Alumno.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nota)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nota)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>

@@ -13,9 +13,9 @@ namespace EscuelaAspNetCore.Controllers
             return View(_context.Cursos);
         }
         [Route("/Curso/DetalleCurso/{cursoId}")]
-        public IActionResult DetalleCurso(string cursoId)
+        public IActionResult DetalleCurso(int cursoId)
         {
-            if (!string.IsNullOrEmpty(cursoId))
+            if (cursoId >= 0)
             {
                 var cursos = from cur in _context.Cursos
                              where cur.Id == cursoId

@@ -1,19 +1,25 @@
-@model IEnumerable<EscuelaAspNetCore.Models.Asignatura>
+@model IEnumerable<EscuelaAspNetCore.Models.Evaluacion>
 
 @{
-    ViewData["Title"] = "Datos de las asignaturas";
+    ViewData["Title"] = "Datos de las evaluaciones";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-action="Create">Crear nueva asignatura</a>
+    <a asp-action="Create">Crear nueva evaluación</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Curso)
+                @Html.DisplayNameFor(model => model.Nota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignatura)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alumno)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -25,7 +31,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Curso.Id)
+                @Html.DisplayFor(modelItem => item.Nota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asignatura.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alumno.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)

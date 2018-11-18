@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MySql.Data.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace EscuelaAspNetCore
 {
@@ -25,7 +27,9 @@ namespace EscuelaAspNetCore
         {
             services.AddMvc();
             services.AddDbContext<EscuelaContext>(
-                options => options.UseInMemoryDatabase(databaseName: "EscuelaAspNetCoreDb")
+                options => options.UseMySQL(
+                    Configuration.GetConnectionString("DefaultConnection")
+                    )
             );
         }
 

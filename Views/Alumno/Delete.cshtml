@@ -1,0 +1,32 @@
+@model EscuelaAspNetCore.Models.Alumno
+
+@{
+    ViewData["Title"] = "Eliminar alumno";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Estás seguro de eliminar el alumno?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Curso)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Curso.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>
